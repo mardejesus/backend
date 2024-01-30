@@ -69,6 +69,20 @@ class ProductManager{
         return result
     }
 
+    async updateProduct(id, productoActualizado){
+        if (!productoActualizado || typeof productoActualizado !== 'object'){
+            throw Error("Se espera un objeto con las propiedades del producto a actualizar")
+        }
+        this.#checkId(id)
+        let jsonObjeto = await this.#jsonAObjeto()
+        let indexProducto = jsonObjeto.products.findIndex((p)=>p.id===id)
+        if (indexProducto<0) { throw Error(`No existe ningun producto con id ${id}`)}
+
+        jsonObjeto.products[indexProducto] = {...jsonObjeto.products[indexProducto], ...productoActualizado}
+
+        await this.#reescribirJsonConObjeto(jsonObjeto)
+    }
+
     async deleteProduct(id){
         this.#checkId(id)
         let jsonObjeto = await this.#jsonAObjeto()
@@ -84,6 +98,8 @@ async function operaciones(){
     try {
         const productos = new ProductManager("./prueba.json")
         //await productos.addProduct({title:"titulo2", description: "producto2", price: 1, thumbnail: null, code: 2, stock: 1})
+        console.log(await productos.getProductById(1))
+        await productos.updateProduct(1, {price:1000})
         console.log(await productos.getProductById(1))
     }catch (error){
         console.log(error)
