@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89dec232-8b74-4d0a-9b71-013424e8d6de" name="Changes" comment="entregas">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entregas/desafio2/desafio2.js" beforeDir="false" afterPath="$PROJECT_DIR$/entregas/desafio2/desafio2.js" afterDir="false" />
-    </list>
+    <list default="true" id="89dec232-8b74-4d0a-9b71-013424e8d6de" name="Changes" comment="entregas" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706576916216</updated>
       <workItem from="1706576919114" duration="2439000" />
-      <workItem from="1706631690251" duration="2587000" />
+      <workItem from="1706631690251" duration="3560000" />
     </task>
     <task id="LOCAL-00001" summary="entregas">
       <option name="closed" value="true" />

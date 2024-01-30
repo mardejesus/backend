@@ -56,14 +56,28 @@ class ProductManager{
         return [...this.#jsonAObjeto().products]; // devuelve copia para garantizar privacidad
     }
 
+    #checkId(id){
+        if (typeof id !== 'number' || id<0) {
+            throw Error("El id debe ser un numero entero mayor o igual a 0")
+        }
+    }
     async getProductById(id){
-        if (typeof id !== 'number' || id<0) {throw Error("El id debe ser un numero entero mayor o igual a 0")}
+        this.#checkId(id)
         let jsonObjeto = await this.#jsonAObjeto()
         let result = jsonObjeto.products.find((p)=>p.id===id)
         if (!result) { throw Error(`No existe ningun producto con id ${id}`)}
         return result
     }
+
+    async deleteProduct(id){
+        this.#checkId(id)
+        let jsonObjeto = await this.#jsonAObjeto()
+        jsonObjeto.products = jsonObjeto.products.filter((p) => p.id !== id);
+        await this.#reescribirJsonConObjeto(jsonObjeto)
+    }
 }
+
+
 
 
 async function operaciones(){
