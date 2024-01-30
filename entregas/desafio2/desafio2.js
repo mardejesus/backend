@@ -4,7 +4,25 @@ class ProductManager{
 
     constructor(path) {
         this.#path = path;
-        this.#fs = require('fs')
+        this.#fs = require('fs').promises
+    }
+
+    async #jsonAObjeto(){
+        try {
+            let jsonString = await this.#fs.readFile(this.#path, 'utf-8');
+            return JSON.parse(jsonString);
+        } catch (error) {
+            throw new Error(`Error al leer el archivo JSON: ${error.message}`);
+        }
+    }
+
+    async #reescribirJsonConObjeto(objeto){
+        try {
+            let jsonString = JSON.stringify(objeto, null, 2);
+            await this.#fs.writeFile(this.#path, jsonString);
+        } catch (error) {
+            throw new Error(`Error al escribir en el archivo JSON: ${error.message}`);
+        }
     }
 
     async addProduct(producto){
@@ -15,14 +33,13 @@ class ProductManager{
         }
 
         try { // intenta acceder al archivo, lo crea si no existe y agrega un objeto {products: []} en formato JSON.
-            await this.#fs.promises.access(this.#path)
+            await this.#fs.access(this.#path)
         }catch (error){
-            await this.#fs.promises.writeFile(this.#path, JSON.stringify({nextid:0, products:[]}, null, 2))
+            await this.#fs.writeFile(this.#path, JSON.stringify({nextid:0, products:[]}, null, 2))
         }
 
         // lee y guarda archivo JSON como string y lo pasa a objeto
-        let jsonString = await this.#fs.promises.readFile(this.#path, "utf-8")
-        let jsonObjeto = JSON.parse(jsonString)
+        let jsonObjeto = await this.#jsonAObjeto()
 
         if (jsonObjeto.products.some(p => p.code === producto.code)){ // verifica que el código no esté repetido
             throw new Error(`El producto con codigo ${producto.code} ya se encuentra en la lista.`)
@@ -32,16 +49,31 @@ class ProductManager{
         jsonObjeto.products.push(producto) // agrega el objeto producto al array de productos
 
         // vuelve a convertir el objeto a JSON y sobreescribe el archivo
-        jsonString = JSON.stringify(jsonObjeto, null, 2)
-        await this.#fs.promises.writeFile(this.#path, jsonString)
+        await this.#reescribirJsonConObjeto(jsonObjeto)
     }
 
     async getProducts(){
-        let jsonObjet= JSON.parse(await this.#fs.promises.readFile(this.#path, "utf-8"))
-        return [...jsonObjet.products]; // devuelve copia para garantizar privacidad
+        return [...this.#jsonAObjeto().products]; // devuelve copia para garantizar privacidad
+    }
+
+    async getProductById(id){
+        if (typeof id !== 'number' || id<0) {throw Error("El id debe ser un numero entero mayor o igual a 0")}
+        let jsonObjeto = await this.#jsonAObjeto()
+        let result = jsonObjeto.products.find((p)=>p.id===id)
+        if (!result) { throw Error(`No existe ningun producto con id ${id}`)}
+        return result
     }
 }
 
 
-const productos = new ProductManager("./prueba.json")
-productos.addProduct({title:"titulo", description: "producto", price: 1, thumbnail: null, code: 1, stock: 1})
+async function operaciones(){
+    try {
+        const productos = new ProductManager("./prueba.json")
+        //await productos.addProduct({title:"titulo2", description: "producto2", price: 1, thumbnail: null, code: 2, stock: 1})
+        console.log(await productos.getProductById(1))
+    }catch (error){
+        console.log(error)
+    }
+}
+
+operaciones()
