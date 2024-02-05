@@ -2,15 +2,6 @@
   "nextid": 2,
   "products": [
     {
-      "title": "titulo",
-      "description": "producto",
-      "price": 1,
-      "thumbnail": null,
-      "code": 1,
-      "stock": 1,
-      "id": 0
-    },
-    {
       "title": "titulo2",
       "description": "producto2",
       "price": 1000,

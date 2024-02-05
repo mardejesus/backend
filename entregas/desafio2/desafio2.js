@@ -99,8 +99,9 @@ async function operaciones(){
         const productos = new ProductManager("./prueba.json")
         //await productos.addProduct({title:"titulo2", description: "producto2", price: 1, thumbnail: null, code: 2, stock: 1})
         console.log(await productos.getProductById(1))
-        await productos.updateProduct(1, {price:1000})
-        console.log(await productos.getProductById(1))
+        //await productos.updateProduct(1, {price:1000})
+        //console.log(await productos.getProductById(1))
+        await productos.deleteProduct(0)
     }catch (error){
         console.log(error)
     }
