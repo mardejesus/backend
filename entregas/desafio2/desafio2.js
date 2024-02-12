@@ -1,10 +1,12 @@
-class ProductManager{
+import {promises as fs} from 'fs'
+
+export class ProductManager{
     #fs;
     #path;
 
     constructor(path) {
         this.#path = path;
-        this.#fs = require('fs').promises
+        this.#fs = fs
     }
 
     async #jsonAObjeto(){
@@ -53,7 +55,14 @@ class ProductManager{
     }
 
     async getProducts(){
-        return [...this.#jsonAObjeto().products]; // devuelve copia para garantizar privacidad
+        try {
+            let obj = await this.#jsonAObjeto();
+            if (!obj || !obj.products){throw new Error('El JSON no tiene a estructura esperada')}
+            return [...obj.products]; // devuelve copia para garantizar privacidad
+        }
+        catch (e){
+            console.log(`Error en el método getProducts: ${e}`)
+        }
     }
 
     #checkId(id){
@@ -94,7 +103,7 @@ class ProductManager{
 
 
 
-async function operaciones(){
+export async function operaciones(){
     try {
         const productos = new ProductManager("./prueba.json")
         //await productos.addProduct({title:"titulo2", description: "producto2", price: 1, thumbnail: null, code: 2, stock: 1})
@@ -107,4 +116,5 @@ async function operaciones(){
     }
 }
 
-operaciones()
+await operaciones()
+
