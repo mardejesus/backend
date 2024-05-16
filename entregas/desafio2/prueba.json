@@ -1,0 +1,14 @@
+{
+  "nextid": 2,
+  "products": [
+    {
+      "title": "titulo2",
+      "description": "producto2",
+      "price": 1000,
+      "thumbnail": null,
+      "code": 2,
+      "stock": 1,
+      "id": 1
+    }
+  ]
+}
