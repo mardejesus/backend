@@ -1,0 +1,40 @@
+1) crear proyecto Node.js:
+    - Crear directorio para proyecto
+    - Inicializar proyecto Node.js con npm init -y
+
+2) instalar dependencias a usar en proyecto:
+    - instalar Express usando npm install express
+
+3) Crear archivo raíz del proyecto (index.js, app.js, o el nombre que prefiera) y escribir código para crear servidor Express:
+    - importar módulo Express
+    - crear instancia de Express
+    - definir puerto en el que correrá el servidor
+    - definir ruta raíz del servidor
+    - definir función que se ejecutará al recibir una petición en la ruta raíz
+    - iniciar servidor en el puerto definido
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Directorio "public":
+Recursos públicos de fácil acceso a clientes.
+ - Para almacenar archivos estáticos (HTML, CSS, JS, imágenes, etc.) que serán servidos por el servidor Express.
+ - Para almacenar archivos que serán descargados por el usuario (archivos PDF, CSV, etc.).
+ Entonces, es una carpeta que guarda recursos públicos de fácil acceso para el cliente.
+ Y se usa para alojar imágenes y servirlas directamente, o para alojar una WEB en todos sus sentidos.
+
+
+app.use() se usa para ejecutar funciones middleware (funciones que se ejecutan antes de llegar a las rutas) en Express.
+Si se pasa un solo argumento a app.use(), se ejecutará en todas las rutas.
+Si se pasa un segundo argumento, se ejecutará solo en la ruta especificada.
+
+
+CÓMO ORGANIZAR CÓDIGO?
+Arquitectura MVC (model-view-controller)
+Organización puede ser:
+1. rutas: definir rutas y asignar controladores específicos
+2. controladores: definir funciones que se ejecutarán al llegar a una ruta
+3. modelos: define modelos de datos para interactuar con la base de datos
+4. servicios: funciones que realizan tareas específicas, operaciones sobre datos que pueden reutilizar los controladores
