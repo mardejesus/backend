@@ -2,15 +2,15 @@ import express from "express";
 
 const router = express.Router();
 
-import ProductsController from "../controllers/products.controller";
+import ProductsController from "../controllers/products.controller.js";
 const pc = new ProductsController;
 
 // Define rutas y asigna controladores para manejar solicitudes
 
-router.get('/', pc.getAllProducts);
-router.get('/:pid', pc.getProductById);
-router.post('/', pc.createProduct);
-router.put('/:pid', pc.updateProduct);
-router.delete('/:pid', pc.deleteProduct);
+router.get('/', (req, res) => pc.getAllProducts);
+router.get('/:pid', (req, res) => pc.getProductById);
+router.post('/', (req, res) => pc.createProduct);
+router.put('/:pid', (req, res) => pc.updateProduct);
+router.delete('/:pid', (req, res) => pc.deleteProduct);
 
 export default router

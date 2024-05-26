@@ -1,5 +1,4 @@
-import FileManager from "./FileManager";
-
+import FileManager from "./FileManager.js";
 export default class CartManager {
     constructor(){
         this.fm = new FileManager('carritos.json');

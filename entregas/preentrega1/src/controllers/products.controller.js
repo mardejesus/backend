@@ -1,5 +1,6 @@
 // Lógica para manejar las peticiones de productos
 // Usa funciones específicas de ProductManager.js para manejar la lógica de los productos
+import ProductManager from '../services/ProductManager.js';
 
 export default class ProductsController {
   pm = new ProductManager('productos.json');
