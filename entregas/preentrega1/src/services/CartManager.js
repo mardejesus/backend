@@ -1,7 +1,7 @@
 import FileManager from "./FileManager.js";
 export default class CartManager {
     constructor(){
-        this.fm = new FileManager('carritos.json');
+        this.fm = new FileManager('carritos.json', {nextId: 0, carts: []});
     }
 
     async createEmptyCart(){

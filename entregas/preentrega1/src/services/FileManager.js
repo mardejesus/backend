@@ -3,10 +3,13 @@ import {promises as fs} from 'fs'
 export default class FileManager{
     #fs;
     #path;
+    #initialObject;
 
-    constructor(path){
+    constructor(path, initialObject){
         this.#fs = fs; // modulo de node para manejo de archivos
         this.#path = path; // ruta de archivo que persiste datos
+        this.#initialObject = initialObject; // objeto inicial que se guarda en el archivo
+        this.rewriteJsonWithObj(initialObject); // escribe el objeto inicial en el archivo (si no existe
     }
 
     async jsonToObj(){

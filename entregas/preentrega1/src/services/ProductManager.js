@@ -3,7 +3,7 @@ import FileManager from './FileManager.js';
 
 export default class ProductService{
     constructor(){
-        this.fm = new FileManager('productos.json');
+        this.fm = new FileManager('productos.json', {nextid: 0, products: []});
     }
 
     async addProduct(product){
